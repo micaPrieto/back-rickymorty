@@ -153,4 +153,19 @@ export class UserService {
   }
 
 
+  async updateProfileImage(userId: string, fileName: string) {
+    const user = await this.userRepository.findOneBy({ id: userId });
+
+    if (!user) throw new NotFoundException('Usuario no encontrado');
+
+    user.profileImage = `uploads/profile-images/${fileName}`;
+    await this.userRepository.save(user);
+
+    return {
+      message: 'Imagen de perfil actualizada',
+      profileImage: user.profileImage,
+    };
+  }
+
+
 }

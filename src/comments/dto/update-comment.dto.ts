@@ -11,5 +11,4 @@ export class UpdateCommentDto {
   @IsOptional()
   @IsBoolean()
   state?: boolean;
-
 }

@@ -1,13 +1,16 @@
-import { Headers, Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, SetMetadata } from '@nestjs/common';
+import { Headers, Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, SetMetadata, UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, LoginUserDto } from './dto';
-import { AuthGuard } from '@nestjs/passport';
-import { IncomingHttpHeaders } from 'http';
 import { User } from './entities/user.entity';
 import { GetUser } from './decorators/get-user.decorator';
 import { RawHeaders } from './decorators/raw-headers.decorator';
 import { ValidRoles } from './interfaces/valid-roles';
 import { Auth } from './decorators/auth.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { Express } from 'express';
+
 
 
 @Controller('user')
@@ -62,6 +65,33 @@ export class UserController {
   @Auth()
   getFavorites(@GetUser() user: User) {
     return this.userService.getFavorites(user);
+  }
+
+  // ? IMAGENES
+
+  @Patch('upload-profile-image')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads/profile-images', // Podés cambiar esta ruta
+      filename: (req, file, callback) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        const ext = extname(file.originalname);
+        callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+      }
+    }),
+    fileFilter: (req, file, cb) => {
+      if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
+        return cb(new BadRequestException('Only image files are allowed!'), false);
+      }
+      cb(null, true);
+    }
+  }))
+  @Auth() 
+   uploadProfileImage(
+    @UploadedFile() file: any,
+    @GetUser() user: User
+  ) {
+    return this.userService.updateProfileImage(user.id, file.filename);
   }
 
 
