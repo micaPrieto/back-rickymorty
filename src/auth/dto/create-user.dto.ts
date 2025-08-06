@@ -53,7 +53,6 @@ export class CreateUserDto {
     fullName: string;
 
 
-    //? new
     @IsOptional()
     @IsString()
     phone?: string;

@@ -50,6 +50,9 @@ export class User {
         cp?: string;
     };
 
+    @Column('text', { nullable: true })
+    profileImage?: string;
+
     @BeforeInsert() //Antes de insertar
     checkFieldsBeforeInsert() {//Pasa el email a minuscula y elimina los espacios
         this.email = this.email.toLowerCase().trim();
