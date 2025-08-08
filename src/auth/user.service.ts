@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 
@@ -186,6 +187,39 @@ export class UserService {
       message: 'Imagen de perfil actualizada',
       profileImage: user.profileImage,
     };
+  }
+
+  async updateUser(user: User, updateUserDto: UpdateUserDto) {
+    try {
+      // Encontramos el usuario en la base de datos
+      const userInDb = await this.userRepository.findOneBy({ id: user.id });
+
+      if (!userInDb) {
+        throw new NotFoundException('Usuario no encontrado');
+      }
+
+      // Actualizamos solo los campos que vienen en el DTO
+      Object.assign(userInDb, updateUserDto);
+
+      // Si viene una fecha de cumpleaños, la convertimos a Date
+      if (updateUserDto.birthday) {
+        userInDb.birthday = new Date(updateUserDto.birthday);
+      }
+
+      // Guardamos los cambios
+      await this.userRepository.save(userInDb);
+
+      // Retornamos el usuario actualizado sin la contraseña
+      const { password, ...userWithoutPassword } = userInDb;
+
+      return {
+        message: 'Usuario actualizado correctamente',
+        user: userWithoutPassword
+      };
+
+    } catch (error) {
+      this.handleDBErrors(error);
+    }
   }
 
 

@@ -10,6 +10,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { Express } from 'express';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 
@@ -46,6 +47,15 @@ export class UserController {
     @GetUser() user: User
   ) {
     return this.userService.checkAuthStatus( user );
+  }
+
+  @Patch('edit-profile')
+  @Auth()
+  updateProfile(
+    @Body() updateUserDto: UpdateUserDto,
+    @GetUser() user: User
+  ) {
+    return this.userService.updateUser(user, updateUserDto);
   }
 
 
