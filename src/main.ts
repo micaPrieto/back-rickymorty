@@ -13,7 +13,7 @@ async function bootstrap() {
 
 
   app.enableCors({
-     origin: [/*'http://localhost:4200',*/ 'https://rickymortybymica.netlify.app'],
+     origin: ['http://localhost:4200', 'https://rickymortybymica.netlify.app'],
      credentials: true,  // si estás usando cookies o auth headers
   });
   app.useGlobalPipes(new ValidationPipe({
