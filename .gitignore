@@ -5,6 +5,10 @@
 
 /postgres
 /uploads
+/Dockerfile
+/docker-compose.yml
+
+/.git
 
 # Logs
 logs
