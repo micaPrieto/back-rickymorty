@@ -48,8 +48,8 @@ export class CreateUserDto {
     password: string;
 
     @IsString()
-    @MinLength(5)
-    @MaxLength(15)
+    @MinLength(3)
+    @MaxLength(30)
     fullName: string;
 
 

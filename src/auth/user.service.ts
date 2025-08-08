@@ -41,7 +41,6 @@ export class UserService {
 
       return {
         ...user,
-        //...userData, //Esto no lo tiene fernando
         token: this.getJwtToken({ id: user.id }) // Genera y devuelve el JWT
       };
 
@@ -52,7 +51,7 @@ export class UserService {
   }
 
   //never: jamas debe regresar un valor
-  private handleDBErrors( error: any ): never {
+  private handleDBErrors2( error: any ): never {
 
     if ( error.code === '23505' ) 
       throw new BadRequestException( error.detail );
@@ -60,6 +59,28 @@ export class UserService {
     console.log(error)
 
     throw new InternalServerErrorException('Please check server logs');
+  }
+
+
+  private handleDBErrors(error: any): never {
+    
+    // Error de clave única ( email repetido)
+    if (error.code === '23505') {
+      throw new BadRequestException(error.detail);
+    }
+
+    // Error de validación de datos
+    if (error.code === '23502') {
+      throw new BadRequestException(`Missing field: ${error.column}`);
+    }
+
+    if (error.code === '22P02') {
+      throw new BadRequestException(`Invalid data type for a field`);
+    }
+
+    console.error('DB Error:', error);
+
+    throw new InternalServerErrorException(error.message || 'Unexpected error');
   }
 
 
