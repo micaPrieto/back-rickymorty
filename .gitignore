@@ -4,6 +4,7 @@
 /build
 
 /postgres
+/uploads
 
 # Logs
 logs
