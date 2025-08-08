@@ -63,10 +63,10 @@ export class UserService {
 
 
   private handleDBErrors(error: any): never {
-    
+
     // Error de clave única ( email repetido)
     if (error.code === '23505') {
-      throw new BadRequestException(error.detail);
+      throw new BadRequestException('Mail already registered');
     }
 
     // Error de validación de datos
