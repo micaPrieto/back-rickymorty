@@ -40,7 +40,6 @@ export class UserController {
     }
   }
 
-
   @Get('check-status')
   @Auth()
   checkAuthStatus(

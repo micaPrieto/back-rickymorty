@@ -130,9 +130,7 @@ export class UserService {
       ...user,
       token: this.getJwtToken({ id: user.id })
     };
-
   }
-
 
 
   async addFavorite(user: User, episodeId: string) {
