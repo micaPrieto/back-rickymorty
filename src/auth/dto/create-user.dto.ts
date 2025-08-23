@@ -4,29 +4,18 @@ import { IsDateString, IsEmail, IsOptional, IsString, Matches, MaxLength, MinLen
 
 class AddressDto {
   @IsOptional()
-  @IsString()
-  @MaxLength(50)
   street?: string;
 
   @IsOptional()
-  @IsString()
-  @MaxLength(50)
   city?: string;
 
   @IsOptional()
-  @IsString()
-  @MaxLength(50)
   location?: string;
 
   @IsOptional()
-  @IsString()
-  @MaxLength(50)
   country?: string;
 
   @IsOptional()
-  @IsString()
-  @MinLength(4)
-  @MaxLength(4)
   cp?: string;
 }
 
