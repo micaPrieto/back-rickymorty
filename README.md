@@ -2,13 +2,14 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
+![NestJS](https://img.shields.io/badge/NestJS-9.x-E0234E?logo=nestjs)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue?logo=postgresql)
+![Render](https://img.shields.io/badge/Deploy-Render-success?logo=render)
 
 ```markdown
 # Rick and Morty Wiki – Backend
 
-![NestJS](https://img.shields.io/badge/NestJS-9.x-E0234E?logo=nestjs)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-blue?logo=postgresql)
-![Render](https://img.shields.io/badge/Deploy-Render-success?logo=render)
+
 
 API desarrollada en **NestJS** para la aplicación **Rick and Morty Wiki**, encargada de manejar autenticación, usuarios, episodios favoritos y comentarios. Proyecto final del programa **Pre-Academy de Moby Digital**.
 
@@ -35,9 +36,8 @@ API desarrollada en **NestJS** para la aplicación **Rick and Morty Wiki**, enca
 ---
 
 ## 🌐 Deploy
-- **Backend:** [Ver API en Render](https://TU-BACKEND-RENDER-LINK)
-- **Frontend (Angular):** [Repositorio aquí](https://github.com/TU-USUARIO/TU-REPO-FRONTEND)
-
+- **Backend:** [Ver API en Render](https://dashboard.render.com/web/srv-d2amrrggjchc73efk8s0)
+- **Frontend (Angular):** [Repositorio aquí](https://github.com/micaPrieto/rick-and-morty)
 ---
 
 ## ▶️ Instalación y ejecución local
@@ -50,3 +50,4 @@ API desarrollada en **NestJS** para la aplicación **Rick and Morty Wiki**, enca
 # Uso diario
 5. Levantar la base de datos: ```docker-compose up -d```
 6. Levantar: ```yarn start:dev```#
+
